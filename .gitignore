@@ -2,4 +2,5 @@ build/
 .*/
 obj/
 .directory
-.depend
+*.depend
+*.layout
