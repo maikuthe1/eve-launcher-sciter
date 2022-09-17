@@ -1,0 +1,61 @@
+html {
+    background: #282828;
+    background-repeat: repeat;
+    padding: 0px;
+    margin: 0px;
+}
+
+body {
+    margin: 0px;
+    padding: 0px;
+}
+
+button {
+    background: #4d4d4d;
+    border: 1px solid #232323;
+    border-radius: 3px;
+    color: white;
+    box-shadow: 3px 3px 3px rgba(0,0,0,0.2);
+    font-weight: normal;
+}
+
+button:hover {
+    background: #515151;
+}
+
+button:focus {
+    background: #0078d4;
+}
+
+#main-container {
+    flow: grid(1, 2);
+    size: *;
+}
+
+#top-container {
+    height: 1*;
+    width: *;
+}
+
+#bottom-container {
+    width: *;
+    padding: 3px;
+    flow: grid(1 2);
+    height: max-content;
+}
+
+#loading-container {
+    width: *;
+    background: #1f1f1f;
+    height: 20px;
+    margin-right: 3px;
+    border-radius: 3px;
+    border: 1px solid #232323;
+}
+
+#loading-fill {
+    background: #0078d7;
+    width: 20%;
+    height: *;
+    border-radius: 3px;
+}
