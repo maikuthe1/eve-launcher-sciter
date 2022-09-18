@@ -5,19 +5,21 @@
 #else
 #include "sciter-gtk-main.cpp"
 #endif
+#include <elzip.hpp>
 class frame: public sciter::window {
 public:
   frame() : window(SW_TITLEBAR | SW_RESIZEABLE | SW_CONTROLS | SW_MAIN | SW_ENABLE_DEBUG) {}
 
-  // passport - lists native functions and properties exposed to script under 'frame' interface name:
   SOM_PASSPORT_BEGIN(frame)
     SOM_FUNCS(
-      SOM_FUNC(nativeMessage)
+      SOM_FUNC(extractUpdate)
     )
   SOM_PASSPORT_END
 
-  // function expsed to script:
-  sciter::string  nativeMessage() { return WSTR("Hello C++ World"); }
+  void extractUpdate() {
+    elz::extractZip("eve.zip", "game/");
+    call_function("extractionFinished");
+  }
 
 };
 

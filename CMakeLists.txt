@@ -15,6 +15,8 @@ include_directories(/home/maiku/Documents/Projects/sciter-js-sdk-main/include)
 
 file(GLOB SOURCES src/*.cpp)
 
+add_subdirectory(extlibs/elzip)
+
 add_executable(eve-launcher-sciter ${SOURCES})
 
 # Compile resources into reosurces.cpp with sciter packer
@@ -27,7 +29,7 @@ add_custom_command(
   /home/maiku/Documents/Projects/sciter-js-sdk-main/bin/linux/
 )
 
-target_link_libraries(eve-launcher-sciter ${LIBRARIES})
+target_link_libraries(eve-launcher-sciter ${LIBRARIES} elzip)
 
 
 #install(TARGETS eve-launcher-sciter RUNTIME DESTINATION bin)

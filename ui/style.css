@@ -1,6 +1,8 @@
 html {
     background: #282828;
-    background-repeat: repeat;
+    background-image: url("images/banner.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
     padding: 0px;
     margin: 0px;
 }
@@ -8,6 +10,36 @@ html {
 body {
     margin: 0px;
     padding: 0px;
+}
+
+#top-bar {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 50px;
+    background: rgba(236, 226, 215, 0.9);
+    width: *;
+    box-shadow: 0px 6px 0px rgba(0,0,0,0.5);
+    flow: grid(1 2);
+}
+
+#logo {
+    margin: 3px;
+}
+
+#navigation {
+    width: *;
+    height: *;
+    font-size: 18px;
+    vertical-align: center;
+    line-height: 45px;
+}
+
+a {
+    line-height: 45px;
+    margin-right: 10px;
+    color: #8f8479;
+    text-decoration: none;
 }
 
 button {
@@ -58,4 +90,5 @@ button:focus {
     width: 0%;
     height: *;
     border-radius: 3px;
+    transition: width(ease-in 200ms);
 }
