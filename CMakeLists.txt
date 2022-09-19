@@ -11,11 +11,7 @@ if(UNIX AND NOT APPLE)
   set(LIBRARIES ${LIBRARIES} ${GTK3_LIBRARIES})
 endif()
 
-if(WIN32)
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -static-libgcc -static-libstdc++ -static -mwindows -municode")
-endif()
-
-include_directories(/home/maiku/Documents/Projects/sciter-js-sdk-main/include)
+include_directories(extlibs/sciter-js-sdk/include)
 
 file(GLOB SOURCES src/*.cpp)
 
@@ -23,15 +19,33 @@ add_subdirectory(extlibs/elzip)
 
 add_executable(eve-launcher-sciter ${SOURCES})
 
+if(WIN32)
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -static-libgcc -static-libstdc++ -static -mwindows -municode")
+  target_sources(eve-launcher-sciter PRIVATE ver.rc)
+endif()
+
+
 # Compile resources into reosurces.cpp with sciter packer
+if(UNIX AND NOT APPLE)
 add_custom_command(
   TARGET eve-launcher-sciter
   PRE_BUILD
   COMMAND ./packfolder
-  ARGS /home/maiku/Documents/Projects/eve-launcher-sciter/ui/ /home/maiku/Documents/Projects/eve-launcher-sciter/src/resources.cpp -v "resources"
+  ARGS ${CMAKE_SOURCE_DIR}/ui/ ${CMAKE_SOURCE_DIR}/src/resources.cpp -v "resources"
   WORKING_DIRECTORY
-  /home/maiku/Documents/Projects/sciter-js-sdk-main/bin/linux/
+  ${CMAKE_SOURCE_DIR}/extlibs/sciter-js-sdk/bin/linux/
 )
+endif()
+if(WIN32)
+add_custom_command(
+  TARGET eve-launcher-sciter
+  PRE_BUILD
+  COMMAND packfolder.exe
+  ARGS ${CMAKE_SOURCE_DIR}/ui/ ${CMAKE_SOURCE_DIR}/src/resources.cpp -v "resources"
+  WORKING_DIRECTORY
+  ${CMAKE_SOURCE_DIR}/extlibs/sciter-js-sdk/bin/windows/
+)
+endif()
 
 target_link_libraries(eve-launcher-sciter ${LIBRARIES} elzip)
 
