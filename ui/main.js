@@ -14,7 +14,7 @@ const versionFile = ".ver";
 var newestUrl;
 var newestSize;
 var pendingVersion;
-const apiUrl = "http://127.0.0.1/api/api.php?request=versions";
+const apiUrl = "https://ever-endless.org/api/api.php?request=versions";
 
 async function RemoveOldArchive()
 {
@@ -84,6 +84,8 @@ async function CheckVersion() {
         // ready to play
         document.getElementById("loading-fill").style.width = "*";
         document.getElementById("play-button").style.transform = "scale(1)";
+        document.getElementById("loading-container").style.visibility = "hidden";
+        document.getElementById("loading-container").style.width = "0";
     }
 }
 
@@ -107,6 +109,9 @@ async function extractionFinished() {
     }
 
     document.getElementById("play-button").style.transform = "scale(1)";
+    document.getElementById("loading-container").style.visibility = "hidden";
+    document.getElementById("loading-container").style.width = "0";
+    PlayGame();
 }
 globalThis.extractionFinished = extractionFinished;
 
@@ -135,11 +140,19 @@ document.ready = function() {
 
 
 function OnDownloadProgress(downloadedBytes, totalBytes) {
+    document.getElementById("progress-div").innerHTML = Math.round(100 * downloadedBytes / totalBytes) + "%";
+    document.getElementById("progress-div").style.left = "calc(" + Math.round(100 * downloadedBytes / totalBytes) + "%)";
      document.getElementById("loading-fill").style.width = "calc(" + Math.round(100 * downloadedBytes / totalBytes) + "%)";
 }
 
+function PlayGame() {
+    env.exec("cd", "game");
+    env.launch("game/ever-endless.exe");
+    env.exec("cd", "..");
+}
+
 document.getElementById("play-button").onclick = async function() {
-    env.launch("game\\ever-endless.exe");
+    PlayGame();
 };
 
 
