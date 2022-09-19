@@ -139,7 +139,7 @@ function OnDownloadProgress(downloadedBytes, totalBytes) {
 }
 
 document.getElementById("play-button").onclick = async function() {
-    env.launch("game/ever-endless.exe");
+    env.launch("game\\ever-endless.exe");
 };
 
 
