@@ -61,8 +61,8 @@ body {
     padding: 6px;
     margin-top: *;
     margin-bottom: *;
-    font-family: 'Nuninto';
-    font-weight: bold;
+    font-family: 'Roboto-Light';
+    font-weight: normal;
     background: rgba(255,255,255, 0);
     transition: background ease 100ms;
 }

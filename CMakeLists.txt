@@ -11,6 +11,10 @@ if(UNIX AND NOT APPLE)
   set(LIBRARIES ${LIBRARIES} ${GTK3_LIBRARIES})
 endif()
 
+if(WIN32)
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -static-libgcc -static-libstdc++ -static -mwindows -municode")
+endif()
+
 include_directories(/home/maiku/Documents/Projects/sciter-js-sdk-main/include)
 
 file(GLOB SOURCES src/*.cpp)
