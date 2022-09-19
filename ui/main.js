@@ -144,10 +144,10 @@ document.getElementById("play-button").onclick = async function() {
 
 
 
-// document.on("click", "a[href^=http]", function(evt, a) {
-//   var url = a.attributes["href"];
-//   env.launch(url);
-// }
+document.on("click", "a[href^=http]", function(evt, a) {
+   var url = a.attributes["href"];
+   env.launch(url);
+});
 
 
 
