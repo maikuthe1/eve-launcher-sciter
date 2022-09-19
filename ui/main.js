@@ -33,9 +33,6 @@ async function CheckVersion() {
     // delete previously downloaded zip if it exists
     RemoveOldArchive();
 
-    // create game directory if it doesn't exist yet
-    if(!sys.fs.$stat("game/"))
-        await sys.fs.mkdir("game/");
 
     // create version file if it doesn't exist yet and set it to version 0
     if(!sys.fs.$stat(versionFile)) {
@@ -48,7 +45,10 @@ async function CheckVersion() {
     let arrayBuffer = sys.fs.$readfile(versionFile);
     var currVersion = sciter.decode(arrayBuffer, "utf-8");
 
-    if(currVersion != versions[0]["version"]) {
+    if(currVersion != versions[0]["version"] || !sys.fs.$stat("game/")) {
+        // create game directory if it doesn't exist yet
+        if(!sys.fs.$stat("game/"))
+            await sys.fs.mkdir("game/");
         newestUrl = versions[0]["url"];
         newestSize = versions[0]["size"];
         try{
@@ -83,6 +83,7 @@ async function CheckVersion() {
     else {
         // ready to play
         document.getElementById("loading-fill").style.width = "*";
+        document.getElementById("play-button").style.transform = "scale(1)";
     }
 }
 
@@ -104,6 +105,8 @@ async function extractionFinished() {
         }
         sys.fs.rename("game/config_backup/", "game/config/");
     }
+
+    document.getElementById("play-button").style.transform = "scale(1)";
 }
 globalThis.extractionFinished = extractionFinished;
 

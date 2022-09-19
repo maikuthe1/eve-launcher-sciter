@@ -1,3 +1,21 @@
+@font-face
+{
+    font-family: 'Nuninto';
+    src: url(Nunito-VariableFont_wght.ttf);
+}
+
+@font-face
+{
+    font-family: 'Roboto-Regular';
+    src: url(Roboto-Regular.ttf);
+}
+
+@font-face
+{
+    font-family: 'Roboto-Light';
+    src: url(Roboto-Light.ttf);
+}
+
 html {
     background: #282828;
     background-image: url("images/banner.png");
@@ -10,6 +28,7 @@ html {
 body {
     margin: 0px;
     padding: 0px;
+    font-family: 'Roboto-Light';
 }
 
 #top-bar {
@@ -20,7 +39,7 @@ body {
     background: rgba(236, 226, 215, 0.9);
     width: *;
     box-shadow: 0px 6px 0px rgba(0,0,0,0.5);
-    flow: grid(1 2);
+    flow: horizontal;
 }
 
 #logo {
@@ -31,32 +50,66 @@ body {
     width: *;
     height: *;
     font-size: 18px;
+    flow: horizontal;
     vertical-align: center;
-    line-height: 45px;
+    margin-left: 6px;
+}
+
+#navigation > div{
+    border-radius: 6px;
+    margin-right: 6px;
+    padding: 6px;
+    margin-top: *;
+    margin-bottom: *;
+    font-family: 'Nuninto';
+    font-weight: bold;
+    background: rgba(255,255,255, 0);
+    transition: background ease 100ms;
+}
+
+#navigation > div:hover {
+    transition: background ease 100ms;
+    background: rgba(255,255,255, 0.8);
 }
 
 a {
-    line-height: 45px;
     margin-right: 10px;
-    color: #8f8479;
+    color: rgba(40,40,40,1);
     text-decoration: none;
 }
 
-button {
-    background: #4d4d4d;
-    border: 1px solid #232323;
+a:hover {
+    color: rgba(20,20,20,1);
+}
+
+#play-button {
+    background: #3aab47;
     border-radius: 3px;
     color: white;
-    box-shadow: 3px 3px 3px rgba(0,0,0,0.2);
+    box-shadow: 1px 1px 3px rgba(0,0,0,0.2);
     font-weight: normal;
+    font-family: 'Roboto-Light';
+    margin: 3px;
+    height: *;
+    vertical-align: middle;
+    transform: scale(0);
+    transition: transform bounce-in 300ms;
 }
 
-button:hover {
-    background: #515151;
+#play-button:hover {
+    background: #37a243;
+    cursor: pointer;
 }
 
-button:focus {
-    background: #0078d4;
+#play-button:focus {
+    background: #37a243;
+    outline: none;
+}
+
+#play-button:active {
+    box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    background: #37a243;
+    outline: none;
 }
 
 #main-container {
@@ -71,9 +124,13 @@ button:focus {
 
 #bottom-container {
     width: *;
-    padding: 3px;
+    padding: 6px;
     flow: grid(1 2);
     height: max-content;
+    margin: 0px;
+    border-radius: 0px;
+    background: rgba(40,40,40,0.8);
+    box-shadow: 0px -6px 3px rgba(0,0,0,0.2);
 }
 
 #loading-container {
@@ -90,5 +147,13 @@ button:focus {
     width: 0%;
     height: *;
     border-radius: 3px;
-    transition: width(ease-in 200ms);
+/*     transition: width linear 200ms; */
+}
+
+output{
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    height: max-content;
+    width: max-content;
 }
