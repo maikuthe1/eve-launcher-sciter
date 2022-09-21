@@ -21,44 +21,49 @@ html {
     background-image: url("images/banner.png");
     background-repeat: no-repeat;
     background-size: 100% 100%;
-    padding: 0px;
-    margin: 0px;
+    padding: 0dip;
+    margin: 0dip;
+    overflow: hidden;
 }
 
 body {
-    margin: 0px;
-    padding: 0px;
+    margin: 0dip;
+    padding: 0dip;
     font-family: 'Roboto-Light';
+    overflow: hidden;
 }
 
 #top-bar {
     position: absolute;
-    top: 0px;
-    left: 0px;
-    height: 50px;
-    background: rgba(236, 226, 215, 0.9);
+    top: 0dip;
+    left: 0dip;
+    height: 50dip;
+    background: rgba(236, 226, 215, 0.8);
+    border-bottom: 1px solid rgba(211,188,163,0.8);
     width: *;
-    box-shadow: 0px 6px 0px rgba(0,0,0,0.5);
+    box-shadow: 0dip 6dip 0dip rgba(0,0,0,0.5);
     flow: horizontal;
+    backdrop-filter: blur(20dip);
+    z-index: 101;
 }
 
 #logo {
-    margin: 3px;
+    margin: 3dip;
 }
 
 #navigation {
     width: *;
     height: *;
-    font-size: 18px;
+    font-size: 18dip;
     flow: horizontal;
     vertical-align: center;
-    margin-left: 6px;
+    margin-left: 6dip;
 }
 
 #navigation > div{
-    border-radius: 6px;
-    margin-right: 6px;
-    padding: 6px;
+    border-radius: 6dip;
+    margin-right: 6dip;
+    padding: 6dip;
     margin-top: *;
     margin-bottom: *;
     font-family: 'Roboto-Light';
@@ -67,13 +72,20 @@ body {
     transition: background ease 100ms;
 }
 
+#navigation > div:active {
+    transform: scale(0.9);
+}
+
 #navigation > div:hover {
     transition: background ease 100ms;
     background: rgba(255,255,255, 0.8);
+    box-shadow: 3dip 3dip 2dip rgba(0,0,0,0.1);
+    cursor: pointer;
+    transform: scale(1.1);
 }
 
 a {
-    margin-right: 10px;
+    margin-right: 10dip;
     color: rgba(40,40,40,1);
     text-decoration: none;
 }
@@ -84,16 +96,23 @@ a:hover {
 
 #play-button {
     background: #3aab47;
-    border-radius: 3px;
+    border-radius: 3dip;
     color: white;
-    box-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+    box-shadow: 1dip 1dip 3dip rgba(0,0,0,0.2);
     font-weight: normal;
     font-family: 'Roboto-Light';
-    margin: 3px;
+    margin: 3dip;
     height: *;
     vertical-align: middle;
     transform: scale(0);
     transition: transform bounce-in 300ms;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 12dip;
+    font-size: 14pt;
+    width: *;
+    text-shadow: 1dip 1dip 0dip rgba(0,0,0,0.2);
 }
 
 #play-button:hover {
@@ -107,9 +126,10 @@ a:hover {
 }
 
 #play-button:active {
-    box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    box-shadow: inset 0 3dip 5dip rgba(0, 0, 0, 0.125);
     background: #37a243;
     outline: none;
+    transform: scale(0.9);
 }
 
 #main-container {
@@ -120,40 +140,67 @@ a:hover {
 #top-container {
     height: 1*;
     width: *;
+    padding: 6dip;
+    padding-top: 55dip;
 }
 
 #bottom-container {
     width: *;
-    padding: 6px;
-    flow: grid(1 2);
+    padding: 6dip;
+    flow: grid(1 2 3);
     height: max-content;
-    margin: 0px;
-    border-radius: 0px;
+    margin: 0dip;
+    border-radius: 0dip;
     background: rgba(40,40,40,0.8);
-    box-shadow: 0px -6px 3px rgba(0,0,0,0.2);
+    box-shadow: 0dip -6dip 3dip rgba(0,0,0,0.2);
+    backdrop-filter: blur(20dip);
 }
 
 #loading-container {
     width: *;
     background: #1f1f1f;
-    height: 20px;
-    margin-right: 3px;
-    border-radius: 3px;
-    border: 1px solid #232323;
+    height: 20dip;
+    margin-right: 3dip;
+    border-radius: 3dip;
+    border: 1dip solid #232323;
 }
 
 #loading-fill {
     background: #0078d7;
     width: 0%;
     height: *;
-    border-radius: 3px;
+    border-radius: 3dip;
 /*     transition: width linear 200ms; */
 }
 
 output{
     position: absolute;
-    bottom: 0px;
-    left: 0px;
+    bottom: 0dip;
+    left: 0dip;
     height: max-content;
     width: max-content;
+}
+
+#top-players-box {
+    border-radius: 3dip;
+    background: rgba(255,255,255,0.8);
+    box-shadow: 3dip 3dip 0dip rgba(0,0,0,0.2);
+    height: *;
+    width: 300dip;
+    backdrop-filter: blur(20dip);
+    border: 1px solid rgba(0,0,0,0.1);
+}
+
+
+#progress-div {
+    background: rgba(255,255,255,0.8);
+    padding: 12dip;
+    border-radius: 3dip;
+    position: absolute;
+    bottom: 32dip;
+    left: 100dip;
+    font-size: 14pt;
+    font-weight: normal;
+    font-family: 'Roboto-Light';
+    border: 1dip solid rgba(0,0,0,0.2);
 }

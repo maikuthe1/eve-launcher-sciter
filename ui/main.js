@@ -10,11 +10,13 @@ function log(str)
   console.log(str);
 }
 
+const selfVersion = "1";
 const versionFile = ".ver";
 var newestUrl;
 var newestSize;
 var pendingVersion;
 const apiUrl = "https://ever-endless.org/api/api.php?request=versions";
+const launcherApiUrl = "http://127.0.0.1/api/api.php?request=launcher_update&version=";
 
 async function RemoveOldArchive()
 {
@@ -22,7 +24,55 @@ async function RemoveOldArchive()
         await sys.fs.unlink("eve.zip");
 }
 
+function ShouldUpdateSelf() {
+    log(Window.this.frame.getFirstArg());
+    if(Window.this.frame.getFirstArg() == "update_self") {
+        if(sys.fs.$stat("eve-launcher-sciter"))
+            sys.fs.unlink("eve-launcher-sciter");
+        if(sys.fs.$stat("eve-launcher-sciter.exe"))
+            sys.fs.unlink("eve-launcher-sciter.exe");
+        sys.fs.copyfile("launcher_update", "eve-launcher-sciter");
+        env.launch("launcher_update.exe updated");
+        Window.this.close(0);
+    }
+    if(Window.this.frame.getFirstArg() == "updated") {
+        if(sys.fs.$stat("launcher_update"))
+            sys.fs.unlink("launcher_update");
+        if(sys.fs.$stat("launcher_update.exe"))
+            sys.fs.unlink("launcher_update.exe");
+    }
+}
+
 async function CheckVersion() {
+
+    ShouldUpdateSelf();
+
+    // fetch newest launcher version
+    const launcherResponse = await fetch(launcherApiUrl + `${selfVersion}`, {
+            headers: { "user-agent": "maiku-launcher" },
+    });
+
+    if(launcherResponse.text() != "false"){
+        log("update_avail");
+        var launcherVersions = JSON.parse(launcherResponse.text());
+        const launcherUpdate = await fetch(launcherVersions[0]["url"], {
+            headers: { "user-agent": "maiku-launcher" },
+            downloadProgress: function(downloadedBytes, totalBytes) {
+                OnDownloadProgress(downloadedBytes, newestSize);
+            }
+        });
+        const launcherBuffer = await launcherUpdate.arrayBuffer();
+
+        let file = await sys.fs.open("launcher_update.exe", "w+", 0o666);
+
+        await file.write(launcherBuffer);
+
+        await file.close();
+//         await env.exec("chmod", "777", "launcher_update");
+//         await env.launch("chmod 777 launcher_update")
+        await env.launch("launcher_update.exe update_self");
+        Window.this.close(0);
+    }
 
     // fetch version info from web api as json (array is always newest -> oldest version as per api)
     const response = await fetch(apiUrl, {

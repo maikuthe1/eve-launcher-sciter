@@ -12,13 +12,22 @@ public:
 
   SOM_PASSPORT_BEGIN(frame)
     SOM_FUNCS(
-      SOM_FUNC(extractUpdate)
+      SOM_FUNC(extractUpdate),
+      SOM_FUNC(getFirstArg)
     )
   SOM_PASSPORT_END
 
   void extractUpdate() {
     elz::extractZip("eve.zip", "game/");
     call_function("extractionFinished");
+  }
+
+  sciter::string getFirstArg() {
+    // not sure how to compare a sciter::string atm so will just return the first argument
+    if(sciter::application::argv().size() > 1)
+      return sciter::application::argv()[1];
+    else
+      return sciter::string();
   }
 
 };
