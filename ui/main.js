@@ -135,6 +135,7 @@ async function CheckVersion() {
         document.getElementById("loading-fill").style.width = "*";
         document.getElementById("play-button").style.transform = "scale(1)";
         document.getElementById("loading-container").style.visibility = "hidden";
+        document.getElementById("progress-div").style.visibility = "hidden";
         document.getElementById("loading-container").style.width = "0";
     }
 }
@@ -161,6 +162,7 @@ async function extractionFinished() {
     document.getElementById("play-button").style.transform = "scale(1)";
     document.getElementById("loading-container").style.visibility = "hidden";
     document.getElementById("loading-container").style.width = "0";
+    document.getElementById("progress-div").style.visibility = "hidden";
     PlayGame();
 }
 globalThis.extractionFinished = extractionFinished;
